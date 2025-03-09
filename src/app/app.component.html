@@ -1,36 +1,20 @@
-<!-- app.component.html -->
-<app-navbar [ngClass]="{ 'hidden': isAuthPage() }"></app-navbar>
-<div [ngClass]="{ 'hidden': isAuthPage() }" class="falling-leaves-container">
-    <!-- Tạo nhiều icon hoặc hình ảnh lá cây -->
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
-    <i class="leaf fa fa-leaf"></i>
+<!-- Navbar chiếm toàn bộ chiều rộng -->
+<app-navbar [ngClass]="{ 'hidden': isAuthPage() }" class="w-full"></app-navbar>
 
-    <!-- Có thể thêm nhiều lá cây hơn nếu cần -->
+<!-- Hiệu ứng lá cây và tuyết rơi -->
+<div [ngClass]="{ 'hidden': isAuthPage() }" class="fixed inset-0 w-full h-full pointer-events-none -z-10">
+    <!-- Lá cây rơi -->
+    <i class="leaf fa fa-leaf absolute animate-fall left-10 top-0"></i>
+    <i class="leaf fa fa-leaf absolute animate-fall left-20 top-0"></i>
+    <i class="leaf fa fa-leaf absolute animate-fall left-30 top-0"></i>
+    <i class="leaf fa fa-leaf absolute animate-fall left-40 top-0"></i>
 
-    <i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-<i class="snowflake fa fa-snowflake"></i>
-  </div>
-<router-outlet></router-outlet>
+    <!-- Tuyết rơi -->
+    <i class="snowflake fa fa-snowflake absolute animate-snow left-50 top-0"></i>
+    <i class="snowflake fa fa-snowflake absolute animate-snow left-60 top-0"></i>
+</div>
+
+<!-- Phần nội dung chính -->
+<div class="min-h-screen w-full flex flex-col items-stretch px-4 sm:px-6 lg:px-16 pt-[70px]">
+  <router-outlet></router-outlet>
+</div>

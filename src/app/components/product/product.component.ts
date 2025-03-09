@@ -45,9 +45,7 @@ export class ProductComponent implements OnInit {
   }
 
   listProducts(): void {
-    this.productService
-      .apiProductListProductGet$Json$Response()
-      .subscribe((rs) => {
+    this.productService.apiProductListProductGet$Json$Response().subscribe((rs) => {
         const response = rs.body;
         if (response.success) {
           this.products = response.data?.filter(x=>x.isActive) ?? [];
@@ -92,7 +90,7 @@ export class ProductComponent implements OnInit {
       id: product.productId,
       name: product.productName,
       price: product.priceOutput,
-      quantity: 1, // Default số lượng là 1
+      quantity: 1,
       imageUrl: this.rootUrl + '/' + product.img,
     };
   
@@ -110,8 +108,12 @@ export class ProductComponent implements OnInit {
       text: 'Sản phẩm đã được thêm vào giỏ hàng!',
       icon: 'success',
       confirmButtonText: 'OK',
+    }).then(() => {
+      // Tải lại trang sau khi người dùng đóng thông báo
+      window.location.reload();
     });
   }
+  
   
   onSearch(): void {
     // Tạo object chứa các tham số tìm kiếm

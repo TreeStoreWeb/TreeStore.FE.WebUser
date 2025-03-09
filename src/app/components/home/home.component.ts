@@ -8,11 +8,12 @@ import { ApiConfiguration } from '../../api/api-configuration';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [BannerSliderComponent, ImageSliderComponent, CommonModule, FormsModule],
+  imports: [FooterComponent, CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
   selectedCategory: string = '';
   cartItems: any[] = JSON.parse(localStorage.getItem('cartItems') || '[]');
   quantity: number = 1;
+  noProducts = false;
 
   constructor(
     private router: Router,
@@ -41,20 +43,17 @@ export class HomeComponent implements OnInit {
   }
 
   listProducts(): void {
-    this.productService.apiProductListProductGet$Json$Response().subscribe(
-      (rs) => {
+    this.productService.apiProductListProductGet$Json$Response().subscribe((rs) => {
         const response = rs.body;
-        if (response?.success) {
-          this.products = response.data ?? [];
+        if (response.success) {
+          this.products = response.data?.filter(x=>x.isActive) ?? [];
           this.filteredProducts = this.products;
         } else {
           this.products = [];
           this.filteredProducts = [];
         }
-      }
-    );
+      });
   }
-
   paginatedProducts(): GetListProductSpResult[] {
     const startIndex = Math.max(0, this.filteredProducts.length - this.currentPage * this.itemsPerPage);
     return this.filteredProducts.slice(startIndex, startIndex + this.itemsPerPage).reverse();
@@ -80,7 +79,9 @@ export class HomeComponent implements OnInit {
   viewDetail(product: GetListProductSpResult): void {
     this.router.navigate(['/xemchitiet', product.productId]);
   }
-
+gotoProduct():void{
+  this.router.navigate(['/sanpham']);
+}
   onSearch(): void {
     this.filteredProducts = this.searchTerm.trim()
       ? this.products.filter(product =>

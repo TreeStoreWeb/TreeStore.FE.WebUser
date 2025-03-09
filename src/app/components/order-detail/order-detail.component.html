@@ -6,9 +6,10 @@
     <!-- Thông tin khách hàng -->
     <div class="customer-info">
       <h2>Thông tin Khách hàng</h2>
-      <p>Tên khách hàng: {{ orderDetail?.nameCustomer || 'Không có' }}</p>
-      <p>Địa chỉ:{{ orderDetail?.address || 'Không có' }}</p>
-      <p>Trạng thái:{{ getStateDescription(orderDetail?.stateId || 0) }}</p> <!-- Hiển thị trạng thái -->
+      <p>Tên khách hàng: {{ orderDetail.nameCustomer || 'Không có' }}</p>
+      <p>Địa chỉ: {{ orderDetail.address || 'Không có' }}</p>
+      <p>Trạng thái: {{ getStateDescription(orderDetail.stateId || 0) }}</p>
+      
     </div>
   
     <!-- Danh sách sản phẩm trong đơn hàng -->

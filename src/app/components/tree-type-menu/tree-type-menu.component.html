@@ -1,11 +1,15 @@
-<div class="tree-type-menu">
-  <h3>Loại cây</h3>
-  <div *ngFor="let category of listCategoriesDB">
-    <button 
-      class="menu-button" 
-      [class.active]="activeButton === category.name" 
-      (click)="category.name && setActive(category.name)">
-      {{ category.name || 'Chưa xác định' }}
-    </button>
+<div class="tree-type-menu bg-white rounded-lg p-4 h-full relative z-10">
+  <h3 class="text-lg font-semibold text-gray-800 pb-3 mb-4 border-b border-gray-200">Loại cây</h3>
+  
+  <div class="category-list space-y-2">
+    <div *ngFor="let category of listCategoriesDB">
+      <button 
+        class="menu-button w-full text-left px-4 py-3 rounded-lg transition-all duration-200 font-medium text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:outline-none relative z-20"
+        [class.active]="activeButton === category.name"
+        [ngClass]="{'bg-blue-100 text-blue-800 font-medium': activeButton === category.name}"
+        (click)="category.name && setActive(category.name)">
+        {{ category.name || 'Chưa xác định' }}
+      </button>
+    </div>
   </div>
 </div>

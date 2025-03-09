@@ -1,41 +1,48 @@
-<div class="product-detail-container">
-  <div class="product-image">
-    <img [src]="rootUrl + '/' + product.img" alt="{{ product.name }}" />
+<div class="product-detail-container flex flex-col md:flex-row bg-white shadow-lg rounded-lg p-5 relative z-10">
+  <!-- Hình ảnh sản phẩm -->
+  <div class="product-image flex-1 flex justify-center mb-5 md:mb-0 md:w-1/3">
+    <img [src]="rootUrl + '/' + product.img" alt="{{ product.name }}" class="w-full h-auto max-w-xs md:max-w-md rounded-lg" />
   </div>
 
-  <div class="product-info">
-    <h1 class="product-title">{{ product.name }}</h1>
-    <p class="product-description">{{ product.description }}</p>
-    <p class="product-price">{{ product.priceOutput | number }} VNĐ</p>
-    <p class="product-price">Hiện có: {{ product.quantity| number }}</p>
-    <div class="product-quantity">
-      <p>Số lượng: </p>
-      <input type="number" id="quantity" name="quantity" min="1" value="1" />
+  <!-- Thông tin sản phẩm -->
+  <div class="product-info flex-1 md:w-2/3 md:ml-5">
+    <h1 class="product-title text-2xl font-bold text-gray-800 mb-2">{{ product.name }}</h1>
+    <p class="product-description text-gray-600 mb-4">{{ product.description }}</p>
+    <p class="product-price text-xl font-semibold text-green-600 mb-2">{{ product.priceOutput | number }} VNĐ</p>
+    <p class="product-quantity text-gray-700 mb-4">Hiện có: <span class="font-semibold">{{ product.quantity | number }}</span></p>
+    
+    <div class="product-quantity flex items-center mb-4">
+      <label for="quantity" class="mr-2">Số lượng:</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" class="border border-gray-300 rounded p-2 w-20" />
     </div>
 
-    <button class="add-to-cart-btn btn btn-primary" (click)="addToCart()">Thêm vào giỏ hàng</button>
-    <div class="mt-2"></div>
+    <button class="add-to-cart-btn bg-blue-600 text-white p-2 rounded hover:bg-blue-500 transition duration-200" (click)="addToCart()">Thêm vào giỏ hàng</button>
+
+    <!-- Thêm các dịch vụ và thông tin bổ sung -->
+    <div class="additional-services mt-5 p-4 bg-gray-100 rounded-lg">
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">Dịch vụ đi kèm</h2>
+      <ul class="list-disc list-inside text-gray-600">
+        <li>📦 Miễn phí vận chuyển cho đơn hàng trên <strong>500.000 VNĐ</strong></li>
+        <li>🔧 Bảo hành <strong>1 năm</strong> cho sản phẩm</li>
+        <li>📞 Hỗ trợ khách hàng <strong>24/7</strong></li>
+        <li>💰 Đổi trả trong vòng <strong>7 ngày</strong> nếu có lỗi từ nhà sản xuất</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <!-- Danh sách bình luận -->
-<div class="review-list">
-  <!-- Container cho nút và chữ -->
- 
-
+<div class="review-list mt-5 relative z-0">
   <!-- Hiển thị khi không có đánh giá -->
-  <div *ngIf="listReviewDB.length === 0" class="no-review">
+  <div *ngIf="listReviewDB.length === 0" class="no-review text-center text-gray-500">
     <p>Chưa có đánh giá nào cho sản phẩm này.</p>
   </div>
-
+  
   <!-- Danh sách đánh giá -->
-  <div *ngFor="let review of listReviewDB" class="review-item">
-    <p><strong>{{ review.customer || 'Người dùng ẩn danh' }}</strong>:   {{ review.comment }}</p>
-   
-    
-   <!-- <button class="btn-delete-review" (click)="deleteReview(review.reviewId)">Xóa</button>-->
+  <div *ngFor="let review of listReviewDB" class="review-item border-b border-gray-300 py-2">
+    <p><strong>{{ review.customer || 'Người dùng ẩn danh' }}</strong>: {{ review.comment }}</p>
   </div>
-
+  
   <!-- Component nhập đánh giá -->
-  <app-review ></app-review> <!-- Chèn component nhập đánh giá tại đây -->
+  <app-review></app-review> <!-- Chèn component nhập đánh giá tại đây -->
 </div>

@@ -1,4 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 * {
     margin: 0;
     padding: 0;
@@ -34,8 +36,8 @@ body.dark-mode {
   }
   /* hommeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee*/
   body.dark-mode .trang-chu {
-    background-color: #333333; /* Màu nền tối */
-    color: #0a5e45;
+    background-color: #666666; /* Màu nền tối */
+    color: #444444;
   
     body.dark-mode .text-gioithieu1 p,body.dark-mode .text-gioithieu2 p {
   background-color: #958c8c;
